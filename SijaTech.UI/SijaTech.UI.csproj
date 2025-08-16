@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyTitle>Skansapung Guard</AssemblyTitle>
+    <AssemblyDescription>Advanced System Guardian with Real-time Protection</AssemblyDescription>
+    <AssemblyCompany>Skansapung Guard</AssemblyCompany>
+    <AssemblyProduct>Skansapung Guard</AssemblyProduct>
+    <AssemblyCopyright>Copyright © Skansapung Guard 2024</AssemblyCopyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SijaTech.Core\SijaTech.Core.csproj" />
+    <ProjectReference Include="..\SijaTech.Engine\SijaTech.Engine.csproj" />
+    <ProjectReference Include="..\SijaTech.Security\SijaTech.Security.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
+    <Folder Include="Resources\Styles\" />
+    <Folder Include="Views\Controls\" />
+    <Folder Include="Views\Dialogs\" />
+    <Folder Include="ViewModels\Controls\" />
+  </ItemGroup>
+
+</Project>

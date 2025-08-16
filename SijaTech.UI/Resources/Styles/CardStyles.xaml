@@ -1,0 +1,75 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <!-- Base Card Style -->
+    <Style x:Key="BaseCardStyle" TargetType="materialDesign:Card">
+        <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Margin" Value="8" />
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1" />
+    </Style>
+
+    <!-- Feature Card Style -->
+    <Style x:Key="FeatureCardStyle" TargetType="materialDesign:Card" BasedOn="{StaticResource BaseCardStyle}">
+        <Setter Property="Padding" Value="24" />
+        <Setter Property="MinHeight" Value="120" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth2" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Stats Card Style -->
+    <Style x:Key="StatsCardStyle" TargetType="materialDesign:Card" BasedOn="{StaticResource BaseCardStyle}">
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="MinHeight" Value="100" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+    <!-- Security Alert Card -->
+    <Style x:Key="SecurityAlertCardStyle" TargetType="materialDesign:Card" BasedOn="{StaticResource BaseCardStyle}">
+        <Setter Property="Background" Value="#FFF3E0" />
+        <Setter Property="BorderBrush" Value="{StaticResource WarningBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- Danger Alert Card -->
+    <Style x:Key="DangerAlertCardStyle" TargetType="materialDesign:Card" BasedOn="{StaticResource BaseCardStyle}">
+        <Setter Property="Background" Value="#FFEBEE" />
+        <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- Success Alert Card -->
+    <Style x:Key="SuccessAlertCardStyle" TargetType="materialDesign:Card" BasedOn="{StaticResource BaseCardStyle}">
+        <Setter Property="Background" Value="#E8F5E8" />
+        <Setter Property="BorderBrush" Value="{StaticResource SecondaryBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- Navigation Card Style -->
+    <Style x:Key="NavigationCardStyle" TargetType="materialDesign:Card" BasedOn="{StaticResource BaseCardStyle}">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
+        <Setter Property="BorderBrush" Value="#E0E0E0" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- Progress Card Style -->
+    <Style x:Key="ProgressCardStyle" TargetType="materialDesign:Card" BasedOn="{StaticResource BaseCardStyle}">
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="MinHeight" Value="80" />
+    </Style>
+
+    <!-- Compact Card Style -->
+    <Style x:Key="CompactCardStyle" TargetType="materialDesign:Card" BasedOn="{StaticResource BaseCardStyle}">
+        <Setter Property="Padding" Value="12" />
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
+        <Setter Property="BorderBrush" Value="#E0E0E0" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+</ResourceDictionary>

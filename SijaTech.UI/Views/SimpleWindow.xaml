@@ -1,0 +1,681 @@
+<Window x:Class="SijaTech.UI.Views.SimpleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Skansapung Guard"
+        Height="700"
+        Width="1000"
+        MinHeight="600"
+        MinWidth="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F8F9FA">
+
+    <Window.Resources>
+        <!-- Avast-Inspired Color Palette -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#FF6600"/>
+        <SolidColorBrush x:Key="SecondaryBrush" Color="#00B4D8"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#0077BE"/>
+        <SolidColorBrush x:Key="SuccessBrush" Color="#28A745"/>
+        <SolidColorBrush x:Key="DangerBrush" Color="#DC3545"/>
+        <SolidColorBrush x:Key="WarningBrush" Color="#FFC107"/>
+        <SolidColorBrush x:Key="InfoBrush" Color="#17A2B8"/>
+        <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#F8F9FA"/>
+        <SolidColorBrush x:Key="DarkBackgroundBrush" Color="#1A1A1A"/>
+        <SolidColorBrush x:Key="CardBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#E9ECEF"/>
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#212529"/>
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#6C757D"/>
+        <SolidColorBrush x:Key="TextLightBrush" Color="#ADB5BD"/>
+
+        <!-- Gradient Brushes -->
+        <LinearGradientBrush x:Key="PrimaryGradientBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FF6600" Offset="0"/>
+            <GradientStop Color="#FF8533" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="SecondaryGradientBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#00B4D8" Offset="0"/>
+            <GradientStop Color="#0077BE" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="SuccessGradientBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#28A745" Offset="0"/>
+            <GradientStop Color="#20C997" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Avast-Style Button Styles -->
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryGradientBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="25"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border.Effect>
+                                <DropShadowEffect Color="#FF6600" Opacity="0.3" ShadowDepth="2" BlurRadius="8"/>
+                            </Border.Effect>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#FF7700" Offset="0"/>
+                                            <GradientStop Color="#FF9944" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#E55A00" Offset="0"/>
+                                            <GradientStop Color="#FF7722" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource SecondaryGradientBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="18,10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="20"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="OutlineButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="18,10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="20"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Avast-Style Card Styles -->
+        <Style x:Key="DashboardCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="Margin" Value="12"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" Opacity="0.08" ShadowDepth="4" BlurRadius="16"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="StatCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" Opacity="0.06" ShadowDepth="2" BlurRadius="12"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FeatureCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="32"/>
+            <Setter Property="Margin" Value="16"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" Opacity="0.1" ShadowDepth="6" BlurRadius="20"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern Tab Style -->
+        <Style x:Key="ModernTabStyle" TargetType="TabControl">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style x:Key="ModernTabItemStyle" TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="Border"
+                                Background="Transparent"
+                                BorderThickness="0,0,0,3"
+                                BorderBrush="Transparent"
+                                Padding="20,12">
+                            <ContentPresenter ContentSource="Header"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                                <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#F3F4F6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Avast-Style Header -->
+        <Border Grid.Row="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF6600" Offset="0"/>
+                    <GradientStop Color="#FF8533" Offset="0.5"/>
+                    <GradientStop Color="#00B4D8" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="40,30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Logo and Title -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Border Background="White"
+                            CornerRadius="16"
+                            Width="64"
+                            Height="64"
+                            Margin="0,0,20,0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#000000" Opacity="0.2" ShadowDepth="4" BlurRadius="12"/>
+                        </Border.Effect>
+                        <TextBlock Text="🛡️"
+                                   FontSize="32"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Skansapung Guard"
+                                   FontSize="32"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                        <TextBlock Text="Advanced System Guardian with Real-time Protection"
+                                   FontSize="16"
+                                   Foreground="White"
+                                   Opacity="0.9"
+                                   Margin="0,4,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Status Indicators -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="White"
+                            CornerRadius="20"
+                            Padding="16,8"
+                            Margin="0,0,12,0"
+                            Opacity="0.95">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="12" Height="12" Fill="{StaticResource SuccessBrush}" Margin="0,0,8,0"/>
+                            <TextBlock Text="Protected" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="White"
+                            CornerRadius="20"
+                            Padding="16,8"
+                            Opacity="0.95">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="🔄" FontSize="14" Margin="0,0,8,0"/>
+                            <TextBlock Name="LastScanText" Text="Last scan: Never" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Dashboard Main Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="40,30">
+            <StackPanel>
+                <!-- Quick Stats Dashboard -->
+                <Grid Margin="0,0,0,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Files Found Stat -->
+                    <Border Grid.Column="0" Style="{StaticResource StatCardStyle}">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="📁" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                            <TextBlock Name="FilesFoundStat" Text="0" FontSize="28" FontWeight="Bold"
+                                       Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Files Found" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Space to Free Stat -->
+                    <Border Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="💾" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                            <TextBlock Name="SpaceToFreeStat" Text="0 B" FontSize="28" FontWeight="Bold"
+                                       Foreground="{StaticResource SecondaryBrush}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Space to Free" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Threats Blocked Stat -->
+                    <Border Grid.Column="2" Style="{StaticResource StatCardStyle}">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="🛡️" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                            <TextBlock Name="ThreatsBlockedStat" Text="0" FontSize="28" FontWeight="Bold"
+                                       Foreground="{StaticResource SuccessBrush}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Threats Blocked" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- System Health Stat -->
+                    <Border Grid.Column="3" Style="{StaticResource StatCardStyle}">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="❤️" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                            <TextBlock Name="SystemHealthStat" Text="Good" FontSize="28" FontWeight="Bold"
+                                       Foreground="{StaticResource SuccessBrush}" HorizontalAlignment="Center"/>
+                            <TextBlock Text="System Health" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Main Action Card -->
+                <Border Style="{StaticResource FeatureCardStyle}" Margin="0,0,0,30">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Left Side - Action Panel -->
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="🧹 System Guardian"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       Margin="0,0,0,12"/>
+
+                            <TextBlock Text="Clean junk files, optimize performance, and free up valuable disk space on your computer."
+                                       FontSize="16"
+                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       LineHeight="24"
+                                       Margin="0,0,0,24"/>
+
+                            <!-- Cleaning Options -->
+                            <StackPanel Margin="0,0,0,24">
+                                <TextBlock Text="What to clean:" FontWeight="SemiBold" FontSize="14"
+                                           Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,12"/>
+
+                                <CheckBox Name="TempFilesCheck"
+                                          Content="🗂️ Temporary Files &amp; Cache"
+                                          IsChecked="True"
+                                          Margin="0,6"
+                                          FontSize="14"/>
+                                <CheckBox Name="BrowserDataCheck"
+                                          Content="🌐 Browser Data &amp; History"
+                                          IsChecked="True"
+                                          Margin="0,6"
+                                          FontSize="14"/>
+                                <CheckBox Name="RegistryCheck"
+                                          Content="🔧 Registry Cleaner"
+                                          IsChecked="False"
+                                          Margin="0,6"
+                                          FontSize="14"/>
+                                <CheckBox Name="RecycleBinCheck"
+                                          Content="🗑️ Recycle Bin"
+                                          IsChecked="False"
+                                          Margin="0,6"
+                                          FontSize="14"/>
+                            </StackPanel>
+
+                            <!-- Action Buttons -->
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="ScanButton"
+                                        Content="🔍 SCAN NOW"
+                                        Style="{StaticResource PrimaryButtonStyle}"
+                                        Margin="0,0,16,0"
+                                        Click="ScanButton_Click" />
+                                <Button Name="CleanButton"
+                                        Content="🧹 CLEAN NOW"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        IsEnabled="False"
+                                        Click="CleanButton_Click" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Right Side - Results Panel -->
+                        <StackPanel Grid.Column="1" Margin="40,0,0,0">
+                            <!-- Scan Status Card -->
+                            <Border Name="ScanStatusCard"
+                                    Background="#F0F9FF"
+                                    BorderBrush="{StaticResource InfoBrush}"
+                                    BorderThickness="2"
+                                    CornerRadius="16"
+                                    Padding="24"
+                                    Margin="0,0,0,20"
+                                    Visibility="Collapsed">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0"
+                                            Background="{StaticResource InfoBrush}"
+                                            CornerRadius="25"
+                                            Width="50"
+                                            Height="50"
+                                            Margin="0,0,16,0">
+                                        <TextBlock Name="ScanStatusIcon" Text="🔍"
+                                                   FontSize="24"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"/>
+                                    </Border>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Name="ScanStatusTitle"
+                                                   Text="Ready to scan..."
+                                                   FontSize="20"
+                                                   FontWeight="Bold"
+                                                   Foreground="{StaticResource TextPrimaryBrush}"/>
+                                        <TextBlock Name="ScanStatusDetails"
+                                                   Text="Click 'SCAN NOW' to analyze your system"
+                                                   FontSize="14"
+                                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                                   Margin="0,4,0,0"/>
+                                    </StackPanel>
+
+                                    <TextBlock Grid.Column="2"
+                                               Name="ScanStatusSize"
+                                               Text=""
+                                               FontSize="24"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource InfoBrush}"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Progress Bar -->
+                            <ProgressBar Name="ScanProgressBar"
+                                         Height="8"
+                                         Background="#E9ECEF"
+                                         Foreground="{StaticResource PrimaryBrush}"
+                                         BorderThickness="0"
+                                         Margin="0,0,0,20"
+                                         Visibility="Collapsed"/>
+
+                            <!-- Results Visualization -->
+                            <Border Name="ResultsVisualization"
+                                    Background="White"
+                                    CornerRadius="16"
+                                    Padding="24"
+                                    Visibility="Collapsed">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="#000000" Opacity="0.08" ShadowDepth="4" BlurRadius="16"/>
+                                </Border.Effect>
+
+                                <StackPanel>
+                                    <TextBlock Text="📊 Scan Results"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                               Margin="0,0,0,20"/>
+
+                                    <!-- Category Results -->
+                                    <ItemsControl Name="CategoryResults">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Background="#F8F9FA"
+                                                        CornerRadius="12"
+                                                        Padding="16"
+                                                        Margin="0,0,0,12">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <TextBlock Grid.Column="0"
+                                                                   Text="{Binding Icon}"
+                                                                   FontSize="20"
+                                                                   Margin="0,0,12,0"
+                                                                   VerticalAlignment="Center"/>
+                                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                            <TextBlock Text="{Binding Category}"
+                                                                       FontWeight="SemiBold"
+                                                                       FontSize="14"/>
+                                                            <TextBlock Text="{Binding Count}"
+                                                                       FontSize="12"
+                                                                       Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                        </StackPanel>
+                                                        <TextBlock Grid.Column="3"
+                                                                   Text="{Binding Size}"
+                                                                   FontWeight="Bold"
+                                                                   FontSize="16"
+                                                                   Foreground="{StaticResource PrimaryBrush}"
+                                                                   VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Security Features Grid -->
+                <Grid Margin="0,0,0,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Real-time Protection Card -->
+                    <Border Grid.Column="0" Style="{StaticResource DashboardCardStyle}">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                                <Border Background="{StaticResource SuccessGradientBrush}"
+                                        CornerRadius="12"
+                                        Width="48"
+                                        Height="48"
+                                        Margin="0,0,16,0">
+                                    <TextBlock Text="🛡️"
+                                               FontSize="24"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="Real-time Protection"
+                                               FontSize="18"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                                    <TextBlock Name="ProtectionStatus"
+                                               Text="🔴 Stopped"
+                                               FontSize="14"
+                                               Foreground="{StaticResource DangerBrush}"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <TextBlock Text="Monitor your system for threats in real-time with our advanced security engine."
+                                       FontSize="14"
+                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,20"/>
+
+                            <Button Name="ToggleProtectionButton"
+                                    Content="▶️ START PROTECTION"
+                                    Style="{StaticResource OutlineButtonStyle}"
+                                    Click="ToggleProtection_Click"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Registry Cleaner Card -->
+                    <Border Grid.Column="1" Style="{StaticResource DashboardCardStyle}">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                                <Border Background="{StaticResource SecondaryGradientBrush}"
+                                        CornerRadius="12"
+                                        Width="48"
+                                        Height="48"
+                                        Margin="0,0,16,0">
+                                    <TextBlock Text="🔧"
+                                               FontSize="24"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="Registry Cleaner"
+                                               FontSize="18"
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                                    <TextBlock Name="RegistryStatus"
+                                               Text="Ready to scan"
+                                               FontSize="14"
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <TextBlock Text="Clean invalid registry entries and optimize system performance safely."
+                                       FontSize="14"
+                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       TextWrapping="Wrap"
+                                       Margin="0,0,0,20"/>
+
+                            <Button Name="ScanRegistryButton"
+                                    Content="🔍 SCAN REGISTRY"
+                                    Style="{StaticResource OutlineButtonStyle}"
+                                    Click="ScanRegistry_Click"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Modern Status Bar -->
+        <Border Grid.Row="2"
+                Background="{StaticResource CardBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="40,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Status Info -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Ellipse Width="12" Height="12" Fill="{StaticResource SuccessBrush}" Margin="0,0,8,0"/>
+                    <TextBlock Name="StatusText"
+                               Text="Ready"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Progress Info -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <ProgressBar Name="ProgressBar"
+                                 Width="200"
+                                 Height="6"
+                                 Background="#E9ECEF"
+                                 Foreground="{StaticResource PrimaryBrush}"
+                                 BorderThickness="0"
+                                 Visibility="Collapsed"
+                                 VerticalAlignment="Center"/>
+                    <TextBlock Name="ProgressText"
+                               Text=""
+                               FontSize="12"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Version Info -->
+                <TextBlock Grid.Column="2"
+                           Text="v1.0.0 | © 2024 Skansapung Guard"
+                           FontSize="12"
+                           Foreground="{StaticResource TextLightBrush}"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
